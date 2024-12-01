@@ -1,18 +1,22 @@
 require('dotenv').config();
 const express = require('express');
-const { connectToSQLServer } = require('./db/sqlServer');
+const { connectToMySQL } = require('./db/mySQL');
+const { connectToSQLServer } = require('./db/sqlServer'); // Solo para local
 const syncRoutes = require('./routes/sync');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Conectar a SQL Server
-connectToSQLServer();
+// Verificar si la conexión es local o en Render
+if (process.env.NODE_ENV !== 'production') {
+  connectToSQLServer(); // Solo conecta a SQL Server si no estás en producción
+}
 
-// Configurar rutas
+// Siempre conecta a MySQL
+connectToMySQL();
+
 app.use('/api', syncRoutes);
 
-// Iniciar el servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
