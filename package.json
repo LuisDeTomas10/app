@@ -1,19 +1,21 @@
 {
   "name": "sqlapi",
   "version": "1.0.0",
-  "description": "API para sincronizar SQL Server con MySQL",
+  "description": "API para manejar usuarios y sincronizar bases de datos",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "express": "^4.18.2",
-    "mssql": "^8.1.0",
-    "mysql2": "^3.2.0"
+    "express": "^4.21.1",
+    "mysql2": "^3.11.5"
   },
   "engines": {
-    "node": "18.x",
+    "node": ">=18.x",
     "npm": ">=8.0.0"
-  }
+  },
+  "keywords": [],
+  "author": "Tu Nombre",
+  "license": "ISC"
 }

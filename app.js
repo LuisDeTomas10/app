@@ -1,20 +1,20 @@
+require('dotenv').config();
 const express = require('express');
-const { connectToMySQL } = require('./db/mySQL');
+const usuariosRoutes = require('./routes/usuarios');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Conectar a MySQL
-connectToMySQL();
+// Middleware para procesar JSON
+app.use(express.json());
+
+// Usar las rutas de usuarios con el prefijo /api
+app.use('/api', usuariosRoutes);
 
 // Ruta raíz
 app.get('/', (req, res) => {
-  res.send('¡Bienvenido a mi API!'); // Mensaje para la ruta raíz
+  res.send('¡Bienvenido a mi API!');
 });
-
-// Rutas específicas (por ejemplo, /api/sync)
-const syncRoutes = require('./routes/sync');
-app.use('/api', syncRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
